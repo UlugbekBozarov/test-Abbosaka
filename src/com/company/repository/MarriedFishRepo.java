@@ -34,4 +34,24 @@ public class MarriedFishRepo {
         }
         return false;
     }
+
+    public void removeMarridFishMale(Fish fish) {
+        if (marriedFishList != null) {
+            for (int i = 0; i < marriedFishList.size(); i++) {
+                if (marriedFishList.get(i).getMale_fish() == fish) {
+                    marriedFishList.remove(marriedFishList.get(i));
+                }
+            }
+        }
+    }
+
+    public void removeMarridFishFemale(Fish fish) {
+        if (marriedFishList != null) {
+            for (int i = 0; i < marriedFishList.size(); i++) {
+                if (marriedFishList.get(i).getFemale_fish() == fish) {
+                    marriedFishList.remove(marriedFishList.get(i));
+                }
+            }
+        }
+    }
 }

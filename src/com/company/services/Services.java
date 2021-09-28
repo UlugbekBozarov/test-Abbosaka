@@ -31,7 +31,7 @@ public class Services {
     }
 
     public void createFish(int malefish, int femalefish) {
-//        System.out.println("Yangi baliqlar dunyoga keldi. Erkaka baliqlar: " + malefish + " ta, Urg'ochi baliqlar: " + femalefish + " ta. Jami baliqlr soni: " + fishRepo.getFishSize());
+        System.out.println("************************** " + fishRepo.getFishList().size());
         for (int i = 0; i < malefish; i++) {
             Fish fish = new Fish(auto.getId(), Gender.MALE);
             fishRepo.createFish(fish);

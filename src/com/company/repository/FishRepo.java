@@ -1,9 +1,6 @@
 package com.company.repository;
 
 import com.company.domain.Fish;
-import com.company.enumeration.Gender;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FishRepo {
@@ -23,7 +20,10 @@ public class FishRepo {
     }
 
     public void removeFish(Fish fish) {
-        this.fishList.remove(fish);
+        if (fish != null && fishList.contains(fish)) {
+            fishList.remove(fish);
+            System.out.println(fish.getName() + " baliq o'ldi.");
+        }
     }
 
     public boolean contains(Fish fish) {

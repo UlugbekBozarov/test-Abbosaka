@@ -37,10 +37,9 @@ public class Main {
             System.out.println(fishRepo.getFishList().toString());
             do {
                 for (int i = 0; i < fishRepo.getFishSize(); i++) {
-                    if (fishRepo.getFishList().get(i).getLife() > 0) {
+                    if (fishRepo.getFishList().get(i) != null && fishRepo.getFishList().get(i).getLife() > 0) {
                         new RunnableDemo(fishRepo.getFishList().get(i), fishRepo, marriedFishRepo, services, idAuto).start();
                     } else {
-                        System.out.println(fishRepo.getFishList().get(i).getName() + " baliq o'ldi.");
                         fishRepo.removeFish(fishRepo.getFishList().get(i));
                     }
                 }

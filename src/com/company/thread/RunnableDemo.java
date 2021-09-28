@@ -40,7 +40,6 @@ public class RunnableDemo implements Runnable {
             MarriedFish marriedFish = null;
             for (int i = 0; i < fish.getLife(); i++) {
                 if (i == fish.getLife() - 1) {
-                    System.out.println(fish.getName() + " baliq o'ldi.");
                     fishRepo.removeFish(fish);
                 } else {
                     if (i == 0) {
@@ -50,7 +49,7 @@ public class RunnableDemo implements Runnable {
                             if (!marriedFishRepo.containsMalefish(fish)) {
                                 List<Fish> list = new ArrayList<>();
                                 for (int j = 0; j < fishRepo.getFishSize(); j++) {
-                                    if (fishRepo.getFishList().get(i).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.FEMALE)) {
+                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.FEMALE)) {
                                         list.add(fishRepo.getFishList().get(j));
                                     }
                                 }
@@ -69,7 +68,7 @@ public class RunnableDemo implements Runnable {
                             if (!marriedFishRepo.containsFemalefish(fish)) {
                                 List<Fish>list = new ArrayList<>();
                                 for (int j = 0; j < fishRepo.getFishSize(); j++) {
-                                    if (fishRepo.getFishList().get(i).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.MALE)) {
+                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.MALE)) {
                                         list.add(fishRepo.getFishList().get(j));
                                     }
                                 }
@@ -92,11 +91,14 @@ public class RunnableDemo implements Runnable {
                             System.out.println(marriedFish.toString() + " baliqlar ko'payishdi. Ulardan " + child_malefish + " ta erkak va " + child_femalefish + " ta urgochi baliq dunyoga keldi.");
                             services.createFish(child_malefish, child_femalefish);
                             for (int j = 0; j < fishRepo.getFishSize(); j++) {
-                                if (fishRepo.getFishList().get(i).getLife() > 0) {
-                                    new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).start();
+
+                                if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() > 0) {
+                                    new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).
+                                            start();
                                 } else {
-                                    System.out.println(fishRepo.getFishList().get(j).getName() + " baliq o'ldi.");
-                                    fishRepo.removeFish(fishRepo.getFishList().get(j));
+                                    if (fishRepo.getFishList().contains(fishRepo.getFishList().get(j))) {
+                                        fishRepo.removeFish(fishRepo.getFishList().get(j));
+                                    }
                                 }
                             }
                         }
