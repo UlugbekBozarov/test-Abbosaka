@@ -22,7 +22,6 @@ public class FishRepo {
     public void removeFish(Fish fish) {
         if (fish != null && fishList.contains(fish)) {
             fishList.remove(fish);
-            System.out.println(fish.getName() + " baliq o'ldi.");
         }
     }
 

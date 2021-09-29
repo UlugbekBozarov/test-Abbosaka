@@ -41,10 +41,11 @@ public class RunnableDemo implements Runnable {
             for (int i = 0; i < fish.getLife(); i++) {
                 if (i == fish.getLife() - 1) {
                     fishRepo.removeFish(fish);
+                    System.out.println(fish.getName() + " baliq o'ldi.");
                 } else {
-                    if (i == 0) {
+                    if (i == 0 && fish.getLife() >= 2) {
                         System.out.println(fish.getName() + " - nomli baliq ulg'aydi");
-                    } else if (i == 1) {
+                    } else if (i == 1 && fish.getLife() >= 3) {
                         if (fish.getGender() == Gender.MALE) {
                             if (!marriedFishRepo.containsMalefish(fish)) {
                                 List<Fish> list = new ArrayList<>();
@@ -84,7 +85,7 @@ public class RunnableDemo implements Runnable {
                                 fishRepo.removeFish(fish);
                             }
                         }
-                    } else if (i == 2) {
+                    } else if (i == 2 && fish.getLife() >= 4) {
                         if (marriedFish != null && fish.getGender().equals(Gender.MALE)) {
                             int child_malefish = random.nextInt(100);
                             int child_femalefish = random.nextInt(100);
@@ -93,8 +94,7 @@ public class RunnableDemo implements Runnable {
                             for (int j = 0; j < fishRepo.getFishSize(); j++) {
 
                                 if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() > 0) {
-                                    new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).
-                                            start();
+                                    new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).start();
                                 } else {
                                     if (fishRepo.getFishList().contains(fishRepo.getFishList().get(j))) {
                                         fishRepo.removeFish(fishRepo.getFishList().get(j));
