@@ -98,6 +98,7 @@ public class RunnableDemo implements Runnable {
                                 } else {
                                     if (fishRepo.getFishList().contains(fishRepo.getFishList().get(j))) {
                                         fishRepo.removeFish(fishRepo.getFishList().get(j));
+                                        System.out.println(fish.getName() + " baliq o'ldi.");
                                     }
                                 }
                             }

@@ -41,6 +41,7 @@ public class Main {
                         new RunnableDemo(fishRepo.getFishList().get(i), fishRepo, marriedFishRepo, services, idAuto).start();
                     } else {
                         fishRepo.removeFish(fishRepo.getFishList().get(i));
+                        System.out.println(fish.getName() + " baliq o'ldi.");
                     }
                 }
                 Thread.sleep((9000));
