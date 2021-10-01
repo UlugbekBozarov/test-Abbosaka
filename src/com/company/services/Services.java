@@ -31,7 +31,6 @@ public class Services {
     }
 
     public void createFish(int malefish, int femalefish) {
-        System.out.println("************************** " + fishRepo.getFishList().size());
         for (int i = 0; i < malefish; i++) {
             Fish fish = new Fish(auto.getId(), Gender.MALE);
             fishRepo.createFish(fish);

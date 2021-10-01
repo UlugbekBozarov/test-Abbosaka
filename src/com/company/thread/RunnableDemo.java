@@ -16,6 +16,8 @@ public class RunnableDemo implements Runnable {
 
     private Thread t;
 
+    private boolean exit;
+
     private Fish fish;
 
     private FishRepo fishRepo;
@@ -42,18 +44,19 @@ public class RunnableDemo implements Runnable {
                 if (i == fish.getLife() - 1) {
                     fishRepo.removeFish(fish);
                     System.out.println(fish.getName() + " baliq o'ldi.");
+                    t.stop();
                 } else {
                     if (i == 0 && fish.getLife() >= 2) {
                         System.out.println(fish.getName() + " - nomli baliq ulg'aydi");
                     } else if (i == 1 && fish.getLife() >= 3) {
                         if (fish.getGender() == Gender.MALE) {
                             if (!marriedFishRepo.containsMalefish(fish)) {
-                                List<Fish> list = new ArrayList<>();
-                                for (int j = 0; j < fishRepo.getFishSize(); j++) {
-                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.FEMALE)) {
-                                        list.add(fishRepo.getFishList().get(j));
-                                    }
-                                }
+                                List<Fish> list = addNewList(fishRepo.getFishList());
+//                                for (int j = 0; j < fishRepo.getFishSize(); j++) {
+//                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.FEMALE)) {
+//                                        list.add(fishRepo.getFishList().get(j));
+//                                    }
+//                                }
                                 if (list.size() > 0) {
                                     Fish femalefish = list.get(random.nextInt(list.size()));
                                     fishRepo.removeFish(femalefish);
@@ -119,7 +122,19 @@ public class RunnableDemo implements Runnable {
     public void start () {
         if (t == null) {
             t = new Thread (this, fish.toString());
+            exit = false;
             t.start ();
         }
+    }
+
+    public synchronized List<Fish> addNewList(List<Fish> fishList) {
+        List<Fish> list = new ArrayList<>();
+        for (int j = 0; j < fishList.size() - 1; j++) {
+            if (fishList.get(j) != null && fishList.get(j).getLife() == 4 && fishList.get(j).getGender().equals(Gender.FEMALE)) {
+                Fish fish = fishList.get(j);
+                list.add(fish);
+            }
+        }
+        return list;
     }
 }

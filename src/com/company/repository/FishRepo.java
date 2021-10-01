@@ -11,7 +11,7 @@ public class FishRepo {
         this.fishList = fishList;
     }
 
-    public void createFish(Fish fish) {
+    public synchronized void createFish(Fish fish) {
         this.fishList.add(fish);
     }
 
@@ -19,7 +19,7 @@ public class FishRepo {
         return this.fishList;
     }
 
-    public void removeFish(Fish fish) {
+    public synchronized void removeFish(Fish fish) {
         if (fish != null && fishList.contains(fish)) {
             fishList.remove(fish);
         }

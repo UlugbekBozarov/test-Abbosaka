@@ -28,8 +28,8 @@ public class Main {
 
         Services services = new Services(fishRepo, idAuto);
 
-        int malefish = random.nextInt(100);
-        int femalefish = random.nextInt(100);
+        int malefish = random.nextInt(40);
+        int femalefish = random.nextInt(40);
 
         services.createOneFish(malefish, femalefish);
 
@@ -48,7 +48,7 @@ public class Main {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Thread interrupted.");
+            System.out.println("Thread interrupted: " + e);
         }
 
     }
