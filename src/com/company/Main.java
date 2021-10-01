@@ -34,19 +34,20 @@ public class Main {
         services.createOneFish(malefish, femalefish);
 
         try {
-            System.out.println(fishRepo.getFishList().toString());
-            do {
-                for (int i = 0; i < fishRepo.getFishSize(); i++) {
-                    if (fishRepo.getFishList().get(i) != null && fishRepo.getFishList().get(i).getLife() > 0) {
-                        new RunnableDemo(fishRepo.getFishList().get(i), fishRepo, marriedFishRepo, services, idAuto).start();
-                    } else {
-                        fishRepo.removeFish(fishRepo.getFishList().get(i));
-                        System.out.println(fishRepo.getFishList().get(i).getName() + " baliq o'ldi.");
-                    }
+//            System.out.println(fishRepo.getFishList().toString());
+//            do {
+//
+//                Thread.sleep((9000));
+//            } while (fishRepo.getFishSize() > 0);
+            for (int i = 0; i < fishRepo.getFishSize(); i++) {
+                if (fishRepo.getFishList().get(i) != null && fishRepo.getFishList().get(i).getLife() > 0) {
+                    new RunnableDemo(fishRepo.getFishList().get(i), fishRepo, marriedFishRepo, services, idAuto).start();
+                } else {
+                    fishRepo.removeFish(fishRepo.getFishList().get(i));
+                    System.out.println(fishRepo.getFishList().get(i).getName() + " baliq o'ldi.");
                 }
-                Thread.sleep((9000));
-            } while (fishRepo.getFishSize() > 0);
-        } catch (InterruptedException e) {
+            }
+        } catch (Exception e) {
             System.out.println("Thread interrupted.");
         }
 

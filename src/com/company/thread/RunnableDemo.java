@@ -91,17 +91,20 @@ public class RunnableDemo implements Runnable {
                             int child_femalefish = random.nextInt(100);
                             System.out.println(marriedFish.toString() + " baliqlar ko'payishdi. Ulardan " + child_malefish + " ta erkak va " + child_femalefish + " ta urgochi baliq dunyoga keldi.");
                             services.createFish(child_malefish, child_femalefish);
-                            for (int j = 0; j < fishRepo.getFishSize(); j++) {
-
-                                if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() > 0) {
-                                    new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).start();
-                                } else {
-                                    if (fishRepo.getFishList().contains(fishRepo.getFishList().get(j))) {
-                                        fishRepo.removeFish(fishRepo.getFishList().get(j));
-                                        System.out.println(fish.getName() + " baliq o'ldi.");
+                            try {
+                                for (int j = 0; j < fishRepo.getFishSize(); j++) {
+                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() > 0) {
+                                        new RunnableDemo(fishRepo.getFishList().get(j), fishRepo, marriedFishRepo, services, idAuto).start();
+                                    } else {
+                                        if (fishRepo.getFishList().contains(fishRepo.getFishList().get(j))) {
+                                            fishRepo.removeFish(fishRepo.getFishList().get(j));
+                                            System.out.println(fish.getName() + " baliq o'ldi.");
+                                        }
                                     }
                                 }
+                            } catch (Exception e) {
                             }
+
                         }
                     }
                 }
