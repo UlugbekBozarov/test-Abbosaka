@@ -52,11 +52,6 @@ public class RunnableDemo implements Runnable {
                         if (fish.getGender() == Gender.MALE) {
                             if (!marriedFishRepo.containsMalefish(fish)) {
                                 List<Fish> list = addNewList(fishRepo.getFishList());
-//                                for (int j = 0; j < fishRepo.getFishSize(); j++) {
-//                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.FEMALE)) {
-//                                        list.add(fishRepo.getFishList().get(j));
-//                                    }
-//                                }
                                 if (list.size() > 0) {
                                     Fish femalefish = list.get(random.nextInt(list.size()));
                                     fishRepo.removeFish(femalefish);
@@ -70,12 +65,7 @@ public class RunnableDemo implements Runnable {
                             }
                         } else {
                             if (!marriedFishRepo.containsFemalefish(fish)) {
-                                List<Fish>list = new ArrayList<>();
-                                for (int j = 0; j < fishRepo.getFishSize(); j++) {
-                                    if (fishRepo.getFishList().get(j) != null && fishRepo.getFishList().get(j).getLife() == 4 && fishRepo.getFishList().get(j).getGender().equals(Gender.MALE)) {
-                                        list.add(fishRepo.getFishList().get(j));
-                                    }
-                                }
+                                List<Fish>list = addNewList(fishRepo.getFishList());
                                 if (list.size() > 0) {
                                     Fish malefish = list.get(random.nextInt(list.size()));
                                     fishRepo.removeFish(malefish);
